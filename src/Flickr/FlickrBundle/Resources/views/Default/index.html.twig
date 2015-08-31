@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% for key, photo in data[0] %}
+
+        <tr class="click">
+            <td><img src="{{ data[1][key][0].source }}" foo="{{ data[3][key] }}"></td>
+            <td><p>{{ photo.title }}</p></td>
+            <td><a href="{{ data[2][key] }}">>>></a></td>
+        </tr>
+
+    {% endfor %}
+
+{% endblock %}
+
+
+
+{% block stylesheets %}
+    <style>
+        html{color:#000;}body,div,p,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}
+        #big{
+            width:100%;
+            height:100%;
+            background:#c4fdc7;
+            position:fixed;
+            left:100%;
+        }
+        #none{
+            display: none;
+        }
+        #block{
+            background: red;width: 100px;height: 100px;display: block;margin-left: 1000px;
+        }
+        .active{
+            display: block !important;
+        }
+        #active{
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            margin: -16px 0 0 -16px;
+            width: 32px;height: 32px;
+            background: url('143341460782.gif') center no-repeat;
+        }
+    </style>
+{% endblock %}
+
+
+
+{% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+
+            $('#none').attr('id','active');
+            $(window).load(function() {
+                $('#active').attr('id','none');
+            });
+
+            $('.click').click(function(){
+                $('#none').attr('id','active');
+                var img = $(this).find('img').attr('foo');
+                $('#big').attr('src',img);
+                $('#big').load(function() {
+                    $('#big').animate({'left':'0%'},800);
+                    $('#active').attr('id','none');
+                });
+            });
+
+            $('#big').click(function(){
+                $('#big').animate({'left':'100%'},1000);
+            });
+        });
+    </script>
+{% endblock %}
