@@ -1,6 +1,6 @@
 <?php
 namespace Flickr\FlickrBundle\Models;
-
+use Flickr\FlickrBundle\Exceptions\FlickrException;
 
 trait CurlTrait{
     /**

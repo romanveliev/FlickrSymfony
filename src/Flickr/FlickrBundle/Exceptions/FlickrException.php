@@ -1,5 +1,5 @@
 <?php
-namespace Flickr\FlickrBundle\Models;
+namespace Flickr\FlickrBundle\Exceptions;
 use Flickr\FlickrBundle\config;
 
 

@@ -4,7 +4,7 @@ namespace Flickr\FlickrBundle\Models;
 
 class Flickr{
     use CurlTrait;
-    private $query = "https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=s863e1a544ee0c20ccd310e198d783065&per_page=10&format=json&nojsoncallback=1";
+    private $query = "https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=863e1a544ee0c20ccd310e198d783065&per_page=10&format=json&nojsoncallback=1";
 
     private static $variable;
     /**
