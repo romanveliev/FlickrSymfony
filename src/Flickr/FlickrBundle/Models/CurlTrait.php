@@ -15,14 +15,7 @@ trait CurlTrait{
         $output = curl_exec($c);
         curl_close($c);
         $allPhotos = json_decode($output);
-        try{
-            if(isset($allPhotos->code)){
-                throw new FlickrException($allPhotos->code);
-            }
-        }catch (FlickrException $e){
-            echo $e->getMessage();
-            die();
-        }
+
         return $allPhotos;
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Flickr\FlickrBundle\Models;
 
+use Flickr\FlickrBundle\Exceptions\FlickrException;
+
 class FlickrModel
 {
     private $query;
@@ -9,14 +11,28 @@ class FlickrModel
     private $sizes     = [];
     private $url       = [];
     private $bigImgUrl = [];
+
+    function __construct($FlickrRecentPhotos){
+        $this->query = $FlickrRecentPhotos;
+    }
+
+
     /**
      * @return array
      */
     public function getRecentPhotos()
     {
         $flickrApi = Flickr::getInstance();
-        $this->query = $flickrApi->getQuery();
+//        $this->query = $flickrApi->getQuery();
         $allPhotos = $flickrApi->getCurl($this->query);
+        try{
+            if(isset($allPhotos->code)){
+                throw new FlickrException($allPhotos->code);
+            }
+        }catch (FlickrException $e){
+            return $e;
+        }
+
         foreach($allPhotos->photos->photo as $firstKey => $photo){
             $this->sizes[] = $this->getSizes($photo->id);
             /**/
@@ -31,6 +47,8 @@ class FlickrModel
 
             }
         }
+
+
         $this->array[0] = $allPhotos->photos->photo;
         $this->array[1] = $this->sizes;
         $this->array[2] = $this->url;
