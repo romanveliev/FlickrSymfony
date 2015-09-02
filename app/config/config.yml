@@ -6,23 +6,23 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: ru
-    FlickrRecentPhotos: https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=s863e1a544ee0c20ccd310e198d783065&per_page=10&format=json&nojsoncallback=1
+    locale: ru_RU
+    FlickrRecentPhotos: https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=863e1a544ee0c20ccd310e198d783065&per_page=10&format=json&nojsoncallback=1
     mailer.transport: sendmail
-    flickr.exceptions:
-            YO: The API key passed was not valid or has expired.
-            ServiceCurrentlyUnavailable: The requested service is temporarily unavailable.
-            WriteOperationFailed: The requested operation failed due to a temporary issue.
-            FormatNotFound: The requested response format was not found.
-            MethodNotFound: The requested method was not found.
-            InvalidSoap: The SOAP envelope send in the request could not be parsed.
-            InvalidXml: The XML-RPC request document could not be parsed.
-            BadUrlFound: One or more arguments contained a URL that has been used for abuse on Flickr.
+#
+    flickr_model.class:      Flickr\FlickrBundle\Models\FlickrModel
+
+#my services
+services:
+    flickr_model:
+        class:        %flickr_model.class%
+        arguments:    [%FlickrRecentPhotos%]
+
 
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: [en] }
     translator: { fallback: en }
     secret:          "%secret%"
     router:
@@ -48,6 +48,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+        my: %locale%
 
 # Assetic Configuration
 assetic:

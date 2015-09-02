@@ -1,9 +1,12 @@
 <?php
-
 namespace Flickr\FlickrBundle\Models;
 
 use Flickr\FlickrBundle\Exceptions\FlickrException;
 
+/**
+ * Class FlickrModel
+ * @package Flickr\FlickrBundle\Models
+ */
 class FlickrModel
 {
     private $query;
@@ -18,16 +21,15 @@ class FlickrModel
 
 
     /**
-     * @return array
+     * @return array|\Exception|FlickrException
      */
     public function getRecentPhotos()
     {
         $flickrApi = Flickr::getInstance();
-//        $this->query = $flickrApi->getQuery();
         $allPhotos = $flickrApi->getCurl($this->query);
         try{
             if(isset($allPhotos->code)){
-                throw new FlickrException($allPhotos->code);
+                throw new FlickrException($allPhotos->code );
             }
         }catch (FlickrException $e){
             return $e;
@@ -49,15 +51,16 @@ class FlickrModel
         }
 
 
-        $this->array[0] = $allPhotos->photos->photo;
-        $this->array[1] = $this->sizes;
-        $this->array[2] = $this->url;
-        $this->array[3] = $this->bigImgUrl;
+        $this->array['allPhotos'] = $allPhotos->photos->photo;
+        $this->array['sizes'] = $this->sizes;
+        $this->array['url'] = $this->url;
+        $this->array['bigPhotoUrl'] = $this->bigImgUrl;
         return $this->array;
     }
+
     /**
-     *@param string $string
-     *@return string
+     * @param $string
+     * @return string
      */
     private function getUrl($string)
     {
@@ -66,9 +69,10 @@ class FlickrModel
         $url = implode("/", $str);
         return $url;
     }
+
     /**
-     *@param int $id
-     *@return array
+     * @param $id
+     * @return mixed
      */
     private function getSizes( $id )
     {

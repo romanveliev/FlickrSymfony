@@ -1,36 +1,41 @@
 <?php
 namespace Flickr\FlickrBundle\Exceptions;
 
-use Flickr\FlickrBundle\Models\Constants;
-
+/**
+ * Class FlickrException
+ * @package Flickr\FlickrBundle\Exceptions
+ */
 class FlickrException extends \Exception{
+    /** @var int  */
     public $message;
     function __construct($code){
-        if($code == Constants::InvalidAPIKey){
-            $this->message = "The API key passed was not valid or has expired.";
+
+        if($code == 100){
+            $this->message = 100;
         }
-        if($code == Constants::ServiceCurrentlyUnavailable){
-            $this->message = "The requested service is temporarily unavailable.";
+        if($code == 105){
+            $this->message = 105;
         }
-        if($code == Constants::WriteOperationFailed){
-            $this->message = "The requested operation failed due to a temporary issue.";
+        if($code == 106){
+            $this->message = 106;
         }
-        if($code == Constants::FormatNotFound){
-            $this->message = "The requested response format was not found.";
+        if($code == 111){
+            $this->message = 111;
         }
-        if($code == Constants::MethodNotFound){
-            $this->message = "The requested method was not found.";
+        if($code == 112){
+            $this->message = 112;
         }
-        if($code == Constants::InvalidSoap){
-            $this->message = "The SOAP envelope send in the request could not be parsed.";
+        if($code == 114){
+            $this->message = 114;
         }
-        if($code == Constants::InvalidXml){
-            $this->message = "The XML-RPC request document could not be parsed.";
+        if($code == 115){
+            $this->message = 115;
         }
-        if($code == Constants::BadUrlFound){
-            $this->message = "One or more arguments contained a URL that has been used for abuse on Flickr.";
+        if($code == 116){
+            $this->message = 116;
         }
 
         parent::__construct($this->message);
     }
+
 }

@@ -1,8 +1,8 @@
-Symfony2 is great: J'aime Symfony2
-COOL: kruto
-The API key passed was not valid or has expired.: Не действующий или просроченый ключ.
-The requested service is temporarily unavailable.: Запрашиваемый сервис временно недоступен.
-The requested operation failed due to a temporary issue.: Время истекло.
-The requested response format was not found.: Формат ответа не был найден.
-The requested method was not found.: Запрос не был найден.
-The SOAP envelope send in the request could not be parsed.: Запрос не может быть обработан.
+100: Не действующий или просроченый ключ.
+105: Запрашиваемый сервис временно недоступен.
+106: Время истекло.
+111: Формат ответа не был найден.
+112: Запрос не был найден.
+114: Запрос не может быть обработан.
+115: XML файл не читается.
+116: Неправильный адрес.
