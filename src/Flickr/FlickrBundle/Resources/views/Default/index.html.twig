@@ -12,13 +12,19 @@
 
     {% endfor %}
 
-    {#{{ app.request  }}#}
-
 {% endblock %}
 
 
 
 {% block stylesheets %}
-    {{ parent() }}
+
+    <link href="{{ asset('bundles/flickrflickr/css/flickr.css') }}" rel="stylesheet" />
+{% endblock %}
+
+
+{% block javascripts %}
+{{ parent() }}
+
+    <script src='{{ asset("bundles/flickrflickr/js/flickr.js") }}' ></script>
 
 {% endblock %}

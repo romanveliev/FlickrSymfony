@@ -4,8 +4,13 @@ parameters:
 #    parameter_name: value
 
 services:
-    flickr_model:
-        class:        Flickr\FlickrBundle\Models\FlickrModel
+    app.twig_extension:
+        class: AppBundle\Twig\AppExtension
+        public: false
+        tags:
+            - { name: twig.extension }
+
+
 #        arguments:    [sendmail]
 #    service_name:
 #        class: AppBundle\Directory\ClassName

@@ -6,7 +6,7 @@
 
         {% block stylesheets %}
 
-            <link href="{{ asset('css/flickr.css') }}" rel="stylesheet" />
+            {#<link href="{{ asset('css/flickr.css') }}"  rel="stylesheet />#}
 
         {% endblock %}
 
@@ -23,8 +23,9 @@
         </table>
 
             {% block javascripts %}
+
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-                <script src="{{ asset('js/flickr.js') }}"></script>
+
             {% endblock %}
 
     </body>

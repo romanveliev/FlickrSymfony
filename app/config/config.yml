@@ -6,17 +6,22 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: ru_RU
-    FlickrRecentPhotos: https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=863e1a544ee0c20ccd310e198d783065&per_page=10&format=json&nojsoncallback=1
+    locale: fr
+    flickr_recent_photos: https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=863e1a544ee0c20ccd310e198d783065&per_page=10&format=json&nojsoncallback=1
     mailer.transport: sendmail
 #
     flickr_model.class:      Flickr\FlickrBundle\Models\FlickrModel
+    default_controller.class:          Flickr\FlickrBundle\Controller\DefaultController
 
 #my services
 services:
     flickr_model:
         class:        %flickr_model.class%
-        arguments:    [%FlickrRecentPhotos%]
+        arguments:    [%flickr_recent_photos%]
+    default_controller:
+        class:        %default_controller.class%
+        calls:
+                     - [setMail, ["@flickr_model"]]
 
 
 
@@ -49,7 +54,6 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     globals:
-        my: %locale%
 
 # Assetic Configuration
 assetic:
