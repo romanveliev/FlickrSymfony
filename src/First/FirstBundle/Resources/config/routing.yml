@@ -1,7 +1,0 @@
-first_first_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: FirstFirstBundle:Default:index }
-
-index:
-    path:     /index
-    defaults: { _controller: FirstFirstBundle:Hello:index }

@@ -1,3 +1,3 @@
 flickr_flickr_homepage:
-    path:     /
+    path:     /flickr
     defaults: { _controller: FlickrFlickrBundle:Default:index }

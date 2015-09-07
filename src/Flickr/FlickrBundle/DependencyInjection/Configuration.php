@@ -20,10 +20,17 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('flickr_flickr');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode
+            ->children()
+                ->scalarNode('flickr_photos')
+                    ->isRequired()
+                    ->cannotBeEmpty()
+                    ->defaultValue('https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=863e1a544ee0c20ccd310e198d783065&per_page=10&format=json&nojsoncallback=1')
+                ->end()
+            ->end();
+
 
         return $treeBuilder;
     }
+
 }

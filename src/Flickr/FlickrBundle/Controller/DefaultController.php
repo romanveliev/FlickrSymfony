@@ -17,16 +17,15 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        $flickrPhotos = $this->getParameter('flickr_recent_photos');
-        $model = new FlickrModel($flickrPhotos);
+        $model = $this->get('flickr_model');
+
         $photos = $model->getRecentPhotos();
-        if($photos instanceof FlickrException){
-            $msg = $this->get('translator')->trans($photos->message);
+        if ($photos instanceof FlickrException) {
+            $msg = $this->get('translator')->trans($photos->message, []);
             return new Response($msg);
         }
 
         return $this->render('FlickrFlickrBundle:Default:index.html.twig', array('data' => $photos));
     }
-
 
 }
