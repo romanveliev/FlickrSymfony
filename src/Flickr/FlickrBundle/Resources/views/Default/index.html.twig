@@ -1,16 +1,20 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Flickr{% endblock %}
+
 {% block body %}
+    <div id="none" ></div>
+    <table border='1'>
+        {% for key, photo in data['allPhotos'] %}
 
-    {% for key, photo in data['allPhotos'] %}
+            <tr class="click">
+                <td><img src="{{ data['sizes'][key][0].source }}" foo="{{ data['bigPhotoUrl'][key] }}"></td>
+                <td><p>{{ photo.title }}</p></td>
+                <td><a href="{{ data['url'][key] }}">>>></a></td>
+            </tr>
 
-        <tr class="click">
-            <td><img src="{{ data['sizes'][key][0].source }}" foo="{{ data['bigPhotoUrl'][key] }}"></td>
-            <td><p>{{ photo.title }}</p></td>
-            <td><a href="{{ data['url'][key] }}">>>></a></td>
-        </tr>
-
-    {% endfor %}
+        {% endfor %}
+    </table>
 
 {% endblock %}
 
@@ -19,6 +23,9 @@
 {% block stylesheets %}
 
     <link href="{{ asset('bundles/flickrflickr/css/flickr.css') }}" rel="stylesheet" />
+
+    {{ parent() }}
+
 {% endblock %}
 
 

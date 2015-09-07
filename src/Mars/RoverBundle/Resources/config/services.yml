@@ -1,0 +1,4 @@
+services:
+#    mars_rover.example:
+#        class: Mars\RoverBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

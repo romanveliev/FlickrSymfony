@@ -1,0 +1,3 @@
+mars_rover_homepage:
+    path:     /mars
+    defaults: { _controller: MarsRoverBundle:Default:index }

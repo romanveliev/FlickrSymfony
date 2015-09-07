@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mars{% endblock %}
+
+
+{% block body %}
+
+    {{ form(form) }}
+
+
+    {% if rovers is not empty %}
+
+        <ul>
+            {% for key, rover in rovers %}
+                <li>
+                    <span>Rover {{ key+1 }}:</span>
+                    <span>{{ rover.getX() }}</span>
+                    <span> {{ rover.getY() }}</span>
+                    <span> {{ rover.getDirection() }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+
+
+    {% endif %}
+
+{% endblock %}

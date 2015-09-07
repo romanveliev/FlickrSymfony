@@ -6,27 +6,28 @@
 
         {% block stylesheets %}
 
-            {#<link href="{{ asset('css/flickr.css') }}"  rel="stylesheet />#}
+            <link href="{{ asset('css/main.css') }}"  rel="stylesheet />
 
         {% endblock %}
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        <div id="none" ></div>
-        <img src="" id="big">
-        <table border='1'>
+        <div id="wrapper">    <img src="" id="big">
+
+            <div id="header">
+                <a href="mars">Mars</a>
+
+                <a href="flickr">Flickr Gallery</a>
+            </div>
+                {% block body %}{% endblock %}
 
 
-            {% block body %}{% endblock %}
+                {% block javascripts %}
 
-        </table>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
-            {% block javascripts %}
-
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-
-            {% endblock %}
-
+                {% endblock %}
+        </div>
     </body>
 </html>
