@@ -1,6 +1,7 @@
 mars_rover:
-    resource: "@MarsRoverBundle/Resources/config/routing.yml"
-    prefix:   /
+    resource: "@MarsRoverBundle/Controller/DefaultController.php"
+    prefix:     mars
+    type:     annotation
 
 flickr_flickr:
     resource: "@FlickrFlickrBundle/Resources/config/routing.yml"

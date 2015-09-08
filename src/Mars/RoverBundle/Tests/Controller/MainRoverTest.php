@@ -2,11 +2,10 @@
 
 namespace Mars\RoverBundle\Tests\Controller;
 
-
-
 use Mars\RoverBundle\models\Rover;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class MainRoverTest extends \PHPUnit_Framework_TestCase
+class MainRoverTest extends WebTestCase
 {
     private $model;
     private $x;

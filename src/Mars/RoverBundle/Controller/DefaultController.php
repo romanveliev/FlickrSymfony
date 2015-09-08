@@ -4,7 +4,8 @@ namespace Mars\RoverBundle\Controller;
 use Mars\RoverBundle\models\Rover;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class DefaultController extends Controller
 {
     /**
@@ -13,6 +14,11 @@ class DefaultController extends Controller
     private $data;
     private $content;
 
+    /**
+     * @Route("/", name="mars_rover")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function indexAction(Request $request)
     {
 
