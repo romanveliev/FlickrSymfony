@@ -6,13 +6,12 @@ namespace Mars\RoverBundle\models;
  */
 abstract class MainRover{
     /**
-     * @param $direction
      * @return mixed
      */
-    abstract protected function changeDirection($direction);
+    abstract public function changeDirection();
     /**
      * @param $direction
      * @return mixed
      */
-    abstract protected function move($direction);
+    abstract public function move($direction);
 }

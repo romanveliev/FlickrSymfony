@@ -13,7 +13,7 @@ trait LookRightTrait
      * @param $length
      * @return string
      */
-    private function lookRight($key, $length)
+    public function lookRight($key, $length)
     {
         if ($key + 1 > $length - 1) {
             $this->rightDirection = $this->array[0];

@@ -50,7 +50,8 @@ class DefaultController extends Controller
                 ],
             ];
             foreach ($array as $value) {
-                $this->data[] = new Rover($value[0], $value[1], $upperRight);
+                $model = new Rover($value[0], $value[1], $upperRight);
+                $this->data[] = $model->changeDirection();
             }
 
 

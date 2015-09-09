@@ -8,6 +8,7 @@ class DefaultControllerTest extends WebTestCase
 {
     public function testIndex()
     {
+
         $client = static::createClient();
 
         $crawler = $client->request('GET', '/flickr');
@@ -15,13 +16,5 @@ class DefaultControllerTest extends WebTestCase
         $this->assertTrue($crawler->filter('a:contains("Mars")')->count() > 0);
     }
 
-    public function testMars()
-    {
-        $client = static::createClient();
 
-        $crawler = $client->request('GET', '/mars/');
-
-
-        $this->assertTrue($crawler->filter('a:contains("Mars")')->count() > 0);
-    }
 }
