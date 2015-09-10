@@ -10,8 +10,7 @@ abstract class MainRover{
      */
     abstract public function changeDirection();
     /**
-     * @param $direction
      * @return mixed
      */
-    abstract public function move($direction);
+    abstract public function move();
 }

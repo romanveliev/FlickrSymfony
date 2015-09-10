@@ -1,5 +1,5 @@
 <?php
-namespace Mars\RoverBundle\Tests\Controller;
+namespace Mars\RoverBundle\Tests\Unit;
 
 
 use Mars\RoverBundle\models\Rover;
@@ -27,8 +27,8 @@ class RoverMoveTest extends WebTestCase{
 
     public function provider(){
         return [
-                    ['1 2 N', 'M', [5,5], 'N', '1 4 N'],
-               ];
+            ['1 2 N', 'M', [5,5], 'N', '1 3 N'],
+        ];
     }
 
 }

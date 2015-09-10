@@ -8,14 +8,16 @@ use Mars\RoverBundle\Exceptions\MarsException;
  */
 class Rover extends MainRover{
     use LookLeftTrait,LookRightTrait;
+
+    /**@var array $array       */
+    private $array = ['N', 'E', 'S', 'W'];
     /**@var int $x             */
     private $x;
     /**@var int $y             */
     private $y;
     /**@var string $direction  */
     private $direction;
-    /**@var array $array       */
-    private $array = ['N', 'E', 'S', 'W'];
+
     /**@var int $maxX          */
     private $maxX;
     /**@var int $maxY          */
@@ -25,8 +27,10 @@ class Rover extends MainRover{
     /** @var array */
     private $arr;
 
+    /** @var string $coordinate*/
     private $coordinate;
-    private $direction2;
+    private $instructions;
+    /** @var array $upperRight */
     private $upperRight;
 
 
@@ -36,26 +40,25 @@ class Rover extends MainRover{
      * @param $upperRight
      */
     public function __construct($coordinate, $direction, $upperRight){
-
-        $this->init($coordinate, $direction, $upperRight);
+        $this->upperRight = $upperRight;
+        $this->coordinate = $coordinate;
+        $this->instructions = $direction;
+        $this->init();
 
     }
 
-    private function init($coordinate, $direction, $upperRight){
+    private function init(){
+        if((int)$this->upperRight[0] && (int)$this->upperRight[0] != 0 ) {
+            $this->maxX = $this->upperRight[0];
+            $this->maxY = $this->upperRight[1];
 
-        if((int)$upperRight[0] && (int)$upperRight[0] != 0 ){
-            $this->maxX = $upperRight[0];
-            $this->maxY = $upperRight[1];
-        }
-        if(preg_match("/^[1-9] [1-9] [A-Z]/", $coordinate)){
-            $arr = explode(' ', $coordinate);
+            $arr = explode(' ', $this->coordinate);
             $this->x = $arr[0];
             $this->y = $arr[1];
             $this->direction = $arr[2];
+
+            $this->instructions = str_split($this->instructions);
         }
-
-        $this->arr = str_split($direction);
-
 
     }
 
@@ -64,7 +67,7 @@ class Rover extends MainRover{
      */
     public function changeDirection()
     {
-        foreach($this->arr as $dir){
+        foreach($this->instructions as $dir){
             $direction = $dir;
             $length = count($this->array);
             $key = array_search($this->direction, $this->array);
@@ -78,46 +81,45 @@ class Rover extends MainRover{
             }
             if($direction == 'M'){
                 try {
-                    $this->move($direction);
+                    $coordinates = $this->move();
                 } catch (MarsException $e) {
                     echo $e->getMessage();die();
                 }
+                return [$this->direction, [$coordinates[0], $coordinates[1] ] ];
             }
             $this->output =  [$this->direction, [$this->x, $this->y]];
         }
-
-        return$this->output;
+        return $this->output;
     }
     /**
-     * @param $direction
      * @return array
      * @throws MarsException
      */
-    public function move($direction){
+    public function move(){
         if ($this->direction == 'N' ) {
             if($this->y + 1 > $this->maxY ){
-                throw new MarsException("End of plateau. Direction: ".$direction.' Last coordinate: '.$this->x.' '.$this->y);
+                throw new MarsException('End of plateau. Last coordinate: '.$this->x.' '.$this->y);
             }else{
                 $this->y+=1;
             }
         }
         if ($this->direction == 'S') {
             if($this->y - 1 <0){
-                throw new MarsException("End of plateau. Direction: ".$direction.' Last coordinate: '.$this->x.' '.$this->y);
+                throw new MarsException('End of plateau. Last coordinate: '.$this->x.' '.$this->y);
             }else{
                 $this->y -= 1;
             }
         }
         if ($this->direction == 'E') {
             if($this->x + 1 >$this->maxX){
-                throw new MarsException("End of plateau. Direction: ".$direction.' Last coordinate: '.$this->x.' '.$this->y);
+                throw new MarsException('End of plateau. Last coordinate: '.$this->x.' '.$this->y);
             }else{
                 $this->x += 1;
             }
         }
         if ($this->direction == 'W') {
             if($this->x - 1 <0){
-                throw new MarsException("End of plateau. Direction: ".$direction.' Last coordinate: '.$this->x.' '.$this->y);
+                throw new MarsException('End of plateau. Last coordinate: '.$this->x.' '.$this->y);
             }else{
                 $this->x -= 1;
             }

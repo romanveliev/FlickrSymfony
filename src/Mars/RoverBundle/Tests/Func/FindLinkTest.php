@@ -1,10 +1,10 @@
 <?php
 
-namespace Mars\RoverBundle\Tests\Controller;
+namespace Mars\RoverBundle\Tests\Func;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class DefaultControllerTest extends WebTestCase
+class FindLinkTest extends WebTestCase
 {
     public function testIndex()
     {

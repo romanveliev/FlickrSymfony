@@ -1,11 +1,11 @@
 <?php
-namespace Mars\RoverBundle\Tests\Controller;
+namespace Mars\RoverBundle\Tests\Unit;
 
 
 use Mars\RoverBundle\models\Rover;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class LookRightTest extends WebTestCase{
+class LookLeftTest extends WebTestCase{
 
     private $array = ['N', 'E', 'S', 'W'];
 
@@ -15,19 +15,19 @@ class LookRightTest extends WebTestCase{
      * @dataProvider provider
      */
     public function testLook($coordinates, $expected){
-        $model = new Rover($coordinates, "R", [5,5]);
+        $model = new Rover($coordinates, "L", [5,5]);
 
         $length = count($this->array);
         $key = array_search($model->getDirection(), $this->array);
-        $right = $model->lookRight($key,$length);
+        $right = $model->lookLeft($key,$length);
 
         $this->assertEquals($expected, $right);
     }
 
     public function provider(){
         return [
-            ['1 4 S', 'W'],
-            ['1 4 S', 'E'],
+            ['1 4 E', 'N'],
+            ['1 4 N', 'W'],
         ];
     }
 
