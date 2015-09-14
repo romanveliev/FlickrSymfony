@@ -6,7 +6,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
@@ -15,19 +14,25 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        // replace this example code with whatever you need
         return $this->render('AppBundle:Default:index.html.twig');
     }
 
     /**
      * @param Request $request
-     * @return Response
+     * @return JsonResponse
      * @Route("/ajax", name="_ajax")
      */
     public function ajaxAction(Request $request){
+        $translator = $this->get('translator');
         if ($request->isXMLHttpRequest()) {
-            return new JsonResponse('<ul><li>item 1</li><li>item 2</li></ul>');
+            $output = [
+                        "/" =>$translator->trans("main"),
+                        "/mars" =>$translator->trans("mars"),
+                        "/flickr" => $translator->trans("flickr"),
+                    ];
+            return new JsonResponse($output);
         }
-        return new Response('json response');
+        return new JsonResponse('json response', 500);
     }
 }
+

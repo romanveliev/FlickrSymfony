@@ -42,8 +42,10 @@ class FlickrModel
             foreach ($this->sizes[$firstKey] as $key => $value) {
                 if ($value->label === 'Large') {
                     $this->bigImgUrl[$firstKey] = $value->source;
+                }if ($value->label === 'Original') {
+                    $this->bigImgUrl[$firstKey] = $value->source;
                 }
-                else if($value->label === 'Original') {
+                else if($value->label === 'Medium') {
                     $this->bigImgUrl[$firstKey] = $value->source;
                 }
 

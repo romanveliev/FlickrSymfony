@@ -6,7 +6,7 @@
 
         {% block stylesheets %}
 
-            {#<link href="{{ asset('css/main.css') }}"  rel="stylesheet />#}
+            <link href="{{ asset('css/main.css') }}"  rel="stylesheet"/>
 
         {% endblock %}
 
@@ -18,9 +18,9 @@
         <div id="wrapper">
 
             <div id="header">
-                <a href="{{ path('mars_rover') }}">Mars</a>
+                <div id="menu">
 
-                <a href="{{ path('flickr_flickr_homepage') }}">Flickr Gallery</a>
+                </div>
             </div>
                 {% block body %}{% endblock %}
 
