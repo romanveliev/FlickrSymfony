@@ -3,16 +3,9 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
 
-# Put parameters here that don't need to change on each machine where the app is deployed
-# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
-parameters:
-    locale: en
-    mailer.transport: sendmail
-
-
 framework:
     #esi:             ~
-    translator:      { fallbacks: [en,ru,fr] }
+    translator:      { fallbacks: [en,ru] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -24,7 +17,7 @@ framework:
     templating:
         engines: ['twig']
         #assets_version: SomeVersionScheme
-    default_locale:  "%locale%"
+    default_locale:  en
     trusted_hosts:   ~
     trusted_proxies: ~
     session:
@@ -37,7 +30,6 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-    globals:
 
 # Assetic Configuration
 assetic:
@@ -82,6 +74,30 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: en_GB
+    lunetics_locale.app_guesser.class: AppBundle\LocaleGuesser\AppLocaleGuesser
 
 flickr_flickr:
     flickr_photos: "%flickr%"
+
+lunetics_locale:
+  guessing_order:
+      - app
+      - query
+      - router
+      - session
+      - cookie
+      - browser
+  strict_mode: false
+  strict_match: true
+  allowed_locales:
+    - en
+    - en_GB
+    - ru
+  switcher:
+      template: AppBundle:Default:locale.html.twig
+      show_current_locale: false
+  guessing_excluded_pattern: ^/api

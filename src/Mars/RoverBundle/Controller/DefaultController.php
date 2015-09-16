@@ -18,7 +18,6 @@ class DefaultController extends Controller
     private $content;
 
     /**
-     * @Route("/", name="mars_rover")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */

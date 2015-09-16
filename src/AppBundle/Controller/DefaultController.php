@@ -10,25 +10,31 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @param Request $request
+     * @return mixed
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+
+
         return $this->render('AppBundle:Default:index.html.twig');
+
     }
 
     /**
      * @param Request $request
      * @return JsonResponse
-     * @Route("/ajax", name="_ajax")
      */
     public function ajaxAction(Request $request){
         $translator = $this->get('translator');
         if ($request->isXMLHttpRequest()) {
+
+            $_locale = $request->attributes->get('_locale', $request->getLocale());
+
             $output = [
-                        "/" =>$translator->trans("main"),
-                        "/mars" =>$translator->trans("mars"),
-                        "/flickr" => $translator->trans("flickr"),
+                        "/".$_locale."" =>$translator->trans("main"),
+                        "/".$_locale."/mars" =>$translator->trans("mars"),
+                        "/".$_locale."/flickr" => $translator->trans("flickr"),
                     ];
             return new JsonResponse($output);
         }

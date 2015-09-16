@@ -1,4 +1,4 @@
-define(['jquery'],function ($) {
+define(['underscore', 'jquery'], function (_, $) {
     function Menu(){
     }
     Menu.prototype = {
@@ -8,20 +8,26 @@ define(['jquery'],function ($) {
                 type: 'get',
                 dataType: 'json',
                 success: function (data) {
-                    if((typeof data) == "string") {
+
+                    console.log(_.every(data));
+
+                    if((typeof data) == "string" ) {
                         document.location.href = "/";
                     }
-
-                    if((typeof data) == "object"){
-                        var text = '';
+                    if((typeof data) == "object" && _.every(data)){
+                        var list = $('<ul>');
                         $.each(data, function(index, value){
-                            text += "<a href='"+index+"'>"+value+" </a>";
+                            $('<li>').wrapInner(
+                                $('<a>').attr({
+                                href:   index
+                            }).text(value)).appendTo(list);
                         });
-
-                        $('#menu').append(text);
+                        $('#menu').append(list).fadeIn(500);
                     }
                 }
             });
+
+
         },
     };
 

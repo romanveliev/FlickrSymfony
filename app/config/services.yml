@@ -14,3 +14,8 @@ services:
     flickr_model:
             class:        %flickr_model.class%
             arguments:    ["@=container.hasParameter('flickr') ? parameter('flickr') : 'https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=863e1a544ee0c20ccd310e198d783065&per_page=10&format=json&nojsoncallback=1'"]
+
+    app.example:
+        class: AppBundle\LocaleGuesser\LocaleGuesser
+        tags:
+            - { name: lunetics_locale.guesser, alias: app }

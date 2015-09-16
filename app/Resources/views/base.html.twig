@@ -22,7 +22,11 @@
 
                 </div>
             </div>
-                {% block body %}{% endblock %}
+                {% block body %}
+
+                    {{ locale_switcher() }}
+
+                {% endblock %}
 
                 {% block javascripts %}
 

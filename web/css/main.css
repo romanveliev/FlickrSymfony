@@ -1,6 +1,56 @@
 html{color:#000;}body,div,p,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}
-
-#header{
-    width: 200px;
-    margin:0 auto;
+a{
+    font: 16px "Gotham A";
+    text-decoration: none;
+    color:#000;
 }
+#wrapper{
+    width: 1000px;
+    margin: 0 auto;
+}
+
+#menu{
+    width: 300px;
+    margin: 0 auto;
+}
+#menu ul li{
+    display: inline-block;
+    margin: 10px;
+}
+#menu a{
+    color: #000000;
+    transition: color .9s ease;
+}
+#menu a:hover{
+    color: #fff;
+}
+
+@keyframes anim{
+    0% {
+        transform: scale(0.1);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+#menu{
+    animation-duration: 2s;
+    animation-name: anim;
+}
+
+
+
+
+#locale_switcher{
+    position: absolute;
+    bottom: 0;
+    right: 0%;
+    width: 200px;
+    height: 200px;
+}
+#locale_switcher ul li{
+}
+

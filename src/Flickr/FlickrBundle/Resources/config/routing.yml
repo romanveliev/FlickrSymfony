@@ -1,3 +1,5 @@
 flickr_flickr_homepage:
-    path:     /flickr
+    path:     /{_locale}/flickr
     defaults: { _controller: FlickrFlickrBundle:Default:index }
+    requirements:
+            _locale: en|en_GB|en_US|fr|ru

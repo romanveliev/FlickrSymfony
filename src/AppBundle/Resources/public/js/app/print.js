@@ -5,7 +5,6 @@ define(['jquery'],function ($) {
         dataType:'json',
         success:function(data){
 
-            //alert(data);
             $('#menu').append(data);
         }
     });
