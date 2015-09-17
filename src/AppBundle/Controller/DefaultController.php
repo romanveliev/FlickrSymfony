@@ -6,6 +6,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
+
 
 class DefaultController extends Controller
 {
@@ -16,6 +18,17 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
 
+        $path = $request->getPathInfo();
+        if ($request->attributes->has('path')) {
+            $path = $request->attributes->get('path');
+        }
+        if (!$path) {
+            return false;
+        }
+        $parts = explode("/", $path);
+        $locale = $parts[1];
+dump($locale);
+        // die();
 
         return $this->render('AppBundle:Default:index.html.twig');
 

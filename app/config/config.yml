@@ -5,7 +5,7 @@ imports:
 
 framework:
     #esi:             ~
-    translator:      { fallbacks: [en,ru] }
+    translator:      { fallbacks: [en,ru,en_GB, en_US] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -91,13 +91,15 @@ lunetics_locale:
       - session
       - cookie
       - browser
+
   strict_mode: false
   strict_match: true
   allowed_locales:
-    - en
     - en_GB
+    - en_US
     - ru
   switcher:
       template: AppBundle:Default:locale.html.twig
       show_current_locale: false
-  guessing_excluded_pattern: ^/api
+
+

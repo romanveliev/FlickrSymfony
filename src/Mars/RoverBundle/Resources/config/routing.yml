@@ -6,5 +6,5 @@ mars_rover:
     path:     /{_locale}/mars
     defaults: { _controller: MarsRoverBundle:Default:index }
     requirements:
-            _locale: en|en_GB|en_US|fr|ru
+            _locale: gb|us|ru|en|en_GB|en_US|fr|ru_RU
 
