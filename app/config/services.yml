@@ -17,6 +17,6 @@ services:
 
     lunetics_locale.app_guesser:
         class: AppBundle\LocaleGuesser\AppLocaleGuesser
-        arguments: ["@lunetics_locale.validator.meta"]
+        arguments: ["@lunetics_locale.validator.meta", %lunetics_locale.allowed_locales%]
         tags:
             - { name: lunetics_locale.guesser, alias: app }

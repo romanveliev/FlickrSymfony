@@ -19,16 +19,17 @@ define(['underscore', 'jquery'], function (_, $) {
                         $.each(data, function(index, value){
                             $('<li>').wrapInner(
                                 $('<a>').attr({
-                                href:   index
-                            }).text(value)).appendTo(list);
+                                    href:   index
+                                }).attr('role', 'menu').text(value)).appendTo(list);
                         });
                         $('#menu').append(list).fadeIn(500);
                     }
                 }
             });
-
-
         },
+        selectpage: function(){
+
+        }
     };
 
     return Menu;

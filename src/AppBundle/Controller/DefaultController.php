@@ -25,9 +25,32 @@ class DefaultController extends Controller
         if (!$path) {
             return false;
         }
+
+        $parts = explode("/", $path);
+        $locale = strtoupper($parts[1]);
+
+
+        $allowedLanguages = ['en_US', 'en_GB'];
+
+        $arr ='';
+        foreach ($allowedLanguages as $lang ) {
+            $oneLang = explode('_', $lang);
+            $arr[][$oneLang[0]] = $oneLang[1];
+        }
+
+        foreach($arr as $smallArr){
+            $findLocale = array_search($locale, $smallArr);
+            if($findLocale){
+                $newLocale = $findLocale.'_'.$locale;
+//                var_dump($newLocale);die();
+            }
+        }
+
+        dump($arr);
+
         $parts = explode("/", $path);
         $locale = $parts[1];
-dump($locale);
+//dump($locale);
         // die();
 
         return $this->render('AppBundle:Default:index.html.twig');

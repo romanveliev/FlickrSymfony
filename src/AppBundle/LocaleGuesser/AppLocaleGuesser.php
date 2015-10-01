@@ -4,16 +4,20 @@ namespace AppBundle\LocaleGuesser;
 use Lunetics\LocaleBundle\LocaleGuesser\AbstractLocaleGuesser;
 use Lunetics\LocaleBundle\Validator\MetaValidator;
 use Symfony\Component\HttpFoundation\Request;
+use Lunetics\LocaleBundle\LocaleInformation\AllowedLocalesProvider;
 
 
 
 class AppLocaleGuesser extends AbstractLocaleGuesser
 {
     private $metaValidator;
+    private $allowedLocales;
+    private $foundLocale;
 
-    public function __construct(MetaValidator $metaValidator)
+    public function __construct(MetaValidator $metaValidator, $allowedLocales)
     {
         $this->metaValidator = $metaValidator;
+        $this->allowedLocales = $allowedLocales;
     }
     /**
      *
@@ -31,16 +35,31 @@ class AppLocaleGuesser extends AbstractLocaleGuesser
         if (!$path) {
             return false;
         }
+
         $parts = explode("/", $path);
-        $foundLocale = $parts[1];
+        $locale = strtoupper($parts[1]);
 
 
-        $allowedLanguages = ['en_EN', 'en_GB'];
+        $arr ='';
+        foreach ($this->allowedLocales as $lang ) {
+            $oneLang = explode('_', $lang);
+            if(isset($oneLang[1])){
+                $arr[][$oneLang[0]] = $oneLang[1];
+            }else {
+                $arr[][$oneLang[0]] = '';
+            }
+        }
+
+        foreach($arr as $smallArr){
+            $findLocale = array_search($locale, $smallArr);
+            if($findLocale){
+                $locale = $findLocale.'_'.$locale;
+            }
+        }
 
 
-
-        if ($localeValidator->isAllowed($foundLocale)) {
-            $this->identifiedLocale = $foundLocale;
+        if ($localeValidator->isAllowed($locale)) {
+            $this->identifiedLocale = $locale;
             return $this->identifiedLocale;
         }
         return false;

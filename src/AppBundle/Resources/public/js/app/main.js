@@ -1,4 +1,6 @@
-define(['./menu'],function (menu) {
-        Menu = new menu;
-        Menu.render();
+define(['./mediator'],function (Mediator) {
+
+    var mediator = new Mediator;
+        mediator.renderMenu();
+
 });
