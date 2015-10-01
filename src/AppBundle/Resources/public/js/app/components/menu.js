@@ -1,6 +1,9 @@
 define(['underscore', 'jquery'], function (_, $) {
     function Menu(){
     }
+
+    var page = '';
+
     Menu.prototype = {
         render: function () {
             $.ajax({
@@ -8,8 +11,6 @@ define(['underscore', 'jquery'], function (_, $) {
                 type: 'get',
                 dataType: 'json',
                 success: function (data) {
-
-                    console.log(_.every(data));
 
                     if((typeof data) == "string" ) {
                         document.location.href = "/";
@@ -23,13 +24,15 @@ define(['underscore', 'jquery'], function (_, $) {
                                 }).attr('role', 'menu').text(value)).appendTo(list);
                         });
                         $('#menu').append(list).fadeIn(500);
+
+                        $('a[role=menu]').click(function(event){
+                            event.preventDefault();
+                        })
                     }
                 }
             });
-        },
-        selectpage: function(){
-
         }
+
     };
 
     return Menu;

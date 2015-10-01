@@ -17,6 +17,17 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        if ($request->isXMLHttpRequest()) {
+            $translator = $this->get('translator');
+
+            $content = "";
+
+
+            $output = [
+                $content, 'main page'
+            ];
+            return new JsonResponse($output);
+        }
 
         $path = $request->getPathInfo();
         if ($request->attributes->has('path')) {

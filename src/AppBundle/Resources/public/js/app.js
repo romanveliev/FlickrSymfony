@@ -6,6 +6,7 @@
 requirejs.config({
     paths: {
         underscore: '/bundles/app/js/lib/underscore',
+        jquery: '/bundles/app/js/lib/jquery'
     }
 
 });

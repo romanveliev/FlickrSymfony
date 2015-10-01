@@ -3,6 +3,7 @@ namespace Mars\RoverBundle\Controller;
 
 use Mars\RoverBundle\models\Rover;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -23,6 +24,27 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+
+        if ($request->isXMLHttpRequest()) {
+            $translator = $this->get('translator');
+
+            $form = "<form class='form-group'>
+                        <label for='form_upperRight'>".$translator->trans('upper_right')."</label><input type='text' id='form_upperRight' name='form[upperRight]' class='form-control'>
+                        <label for='form_coordinate1'>".$translator->trans('upper_right')."</label><input type='text' id='form_coordinate1' name='form[coordinate1]' class='form-control'>
+                        <label for='form_direction1'>".$translator->trans('coordinate_1')."</label><input type='text' id='form_direction1' name='form[coordinate1]' class='form-control'>
+                        <label for='form_coordinate2'>".$translator->trans('upper_right')."</label><input type='text' id='form_coordinate2' name='form[coordinate2]' class='form-control'>
+                        <label for='form_direction2'>".$translator->trans('coordinate_2')."</label><input type='text' id='form_direction2' name='form[coordinate2]' class='form-control'>
+                        <input type='button' class='btn btn-default' value='".$translator->trans('upper_right')."'>
+                    </form>";
+
+
+            $output = [
+               $form, 'text for mars'
+            ];
+            return new JsonResponse($output);
+        }
+
+
         $form = $this->createFormBuilder()
             ->add('upperRight', 'text', ['constraints' => [new NotBlank(), new Regex(["pattern"=>"/^[1-9] [1-9]$/","message"=>"Upper-Right coordinates are not valid."])],'attr'  => ['class' => 'btn'] ])
             ->add('coordinate1', 'text',['constraints'=>[new NotBlank(),new Regex(["pattern"=>"/^[1-9] [1-9] [N,W,S,E]$/","message"=>"Rover's coordinates are not valid."])],'attr'  => ['class' => 'btn'] ])
