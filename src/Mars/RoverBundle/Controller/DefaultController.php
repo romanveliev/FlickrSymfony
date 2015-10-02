@@ -17,6 +17,7 @@ class DefaultController extends Controller
      */
     private $data;
     private $content;
+    private $output;
 
     /**
      * @param Request $request
@@ -27,21 +28,31 @@ class DefaultController extends Controller
 
         if ($request->isXMLHttpRequest()) {
             $translator = $this->get('translator');
+            $type = json_decode($request->query->get('type'));
 
-            $form = "<form class='form-group'>
+            if($type == 'content'){
+                $form = "<form class='form-group'>
                         <label for='form_upperRight'>".$translator->trans('upper_right')."</label><input type='text' id='form_upperRight' name='form[upperRight]' class='form-control'>
-                        <label for='form_coordinate1'>".$translator->trans('upper_right')."</label><input type='text' id='form_coordinate1' name='form[coordinate1]' class='form-control'>
-                        <label for='form_direction1'>".$translator->trans('coordinate_1')."</label><input type='text' id='form_direction1' name='form[coordinate1]' class='form-control'>
-                        <label for='form_coordinate2'>".$translator->trans('upper_right')."</label><input type='text' id='form_coordinate2' name='form[coordinate2]' class='form-control'>
-                        <label for='form_direction2'>".$translator->trans('coordinate_2')."</label><input type='text' id='form_direction2' name='form[coordinate2]' class='form-control'>
-                        <input type='button' class='btn btn-default' value='".$translator->trans('upper_right')."'>
+                        <label for='form_coordinate1'>".$translator->trans('coordinate_1')."</label><input type='text' id='form_coordinate1' name='form[coordinate1]' class='form-control'>
+                        <label for='form_direction1'>".$translator->trans('direction_1')."</label><input type='text' id='form_direction1' name='form[coordinate1]' class='form-control'>
+                        <label for='form_coordinate2'>".$translator->trans('coordinate_2')."</label><input type='text' id='form_coordinate2' name='form[coordinate2]' class='form-control'>
+                        <label for='form_direction2'>".$translator->trans('direction_2')."</label><input type='text' id='form_direction2' name='form[coordinate2]' class='form-control'>
+                        <input type='button' class='btn btn-default' value='".$translator->trans('move')."'>
                     </form>";
 
+                $this->output = [
+                    $form, $translator->trans('mars_project')
+                ];
+                return new JsonResponse($this->output);
+            }
 
-            $output = [
-               $form, 'text for mars'
-            ];
-            return new JsonResponse($output);
+            if($type == 'header'){
+                $this->output = [
+                    '<p>HEADER MARS</p>', $translator->trans('mars_project')
+                ];
+                return new JsonResponse($this->output);
+
+            }
         }
 
 

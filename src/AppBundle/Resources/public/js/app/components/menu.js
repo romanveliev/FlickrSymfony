@@ -1,7 +1,6 @@
 define(['underscore', 'jquery'], function (_, $) {
     function Menu(){
     }
-
     var page = '';
 
     Menu.prototype = {
@@ -11,7 +10,6 @@ define(['underscore', 'jquery'], function (_, $) {
                 type: 'get',
                 dataType: 'json',
                 success: function (data) {
-
                     if((typeof data) == "string" ) {
                         document.location.href = "/";
                     }
@@ -27,12 +25,21 @@ define(['underscore', 'jquery'], function (_, $) {
 
                         $('a[role=menu]').click(function(event){
                             event.preventDefault();
-                        })
+                        });
+
                     }
                 }
             });
-        }
+        },
 
+        getPage: function(){
+            setTimeout(function(){
+                $('a[role=menu]').click(function(event){
+                        page = $(this).attr('href');
+                        $(document).trigger('menu.page', page);
+                    })
+                }, 300)
+            }
     };
 
     return Menu;

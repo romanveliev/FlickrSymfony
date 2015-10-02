@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class DefaultController extends Controller
 {
+    private $output;
     /**
      * @param Request $request
      * @return mixed
@@ -19,14 +20,23 @@ class DefaultController extends Controller
     {
         if ($request->isXMLHttpRequest()) {
             $translator = $this->get('translator');
+            $type = json_decode($request->query->get('type'));
+            if($type == 'content'){
 
-            $content = "";
+                $this->output = [
+                    '', $translator->trans('main_page')
+                ];
+                return new JsonResponse($this->output);
+            }
 
+            if($type == 'header'){
+                $this->output = [
+                    '', $translator->trans('main_page')
+                ];
+                return new JsonResponse($this->output);
 
-            $output = [
-                $content, 'main page'
-            ];
-            return new JsonResponse($output);
+            }
+
         }
 
         $path = $request->getPathInfo();

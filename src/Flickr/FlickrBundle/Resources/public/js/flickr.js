@@ -15,7 +15,9 @@ $(document).ready(function(){
         });
     });
 
-    $('#big').click(function(){
-        $('#big').animate({'left':'100%'},1000);
-    });
+   setTimeout(function(){
+       $('#big').click(function(){
+           $('#big').animate({'left':'100%'},1000);
+       })
+   }, 400)
 });

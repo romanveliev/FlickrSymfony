@@ -1,14 +1,14 @@
-define(['jquery', './components/menu'], function ($, Menu) {
+define(['jquery', './components/menu', './components/content'], function ($, Menu, Content) {
     function Mediator(){
     }
     var page ='';
 
     Mediator.prototype = {
         menu: new Menu,
+        content: new Content,
         renderMenu: function () {
             this.menu.render();
         },
-
         selectPage: function(){
             setTimeout(function(){
                 $('a[role=menu]').click(function(event){
@@ -23,27 +23,19 @@ define(['jquery', './components/menu'], function ($, Menu) {
                             success: function (data) {
                                 if((typeof data) == "string" ) {
                                 }
-
                                 if((typeof data) == "object"){
-                                    console.log(data[0]);
+                                    console.log(data[0], data[1]);
                                     var myform = data[0];
-
-                                    $('#content').empty().append(myform).fadeIn(1000);
+                                    $('#content').css('display','none').empty().append(myform).fadeIn(1000);
                                 }
                             }
                         });
-
                     }else{
                         console.log('net');
                     }
                 })
-
-
-
             }, 500);
         }
-
-
     };
 
     return Mediator;

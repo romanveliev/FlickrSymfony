@@ -1,3 +1,9 @@
-Upper right: Upper right
+upper_right: Upper right
 Coordinate: Coordinate
 Direction: Direction
+
+coordinate_1: Coordinate 1
+coordinate_2: Coordinate 2
+direction_2: Direction 2
+direction_1: Direction 1
+move: Move
