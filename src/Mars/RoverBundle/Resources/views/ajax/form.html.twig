@@ -1,0 +1,19 @@
+{% form_theme form 'form_table_layout.html.twig' %}
+
+    {{ form(form)|trans|raw }}
+
+{% if rovers is not empty %}
+
+    <ul>
+        {% for key, rover in rovers %}
+            <li>
+                <span>Rover {{ key+1 }}:</span>
+                <span>{{ rover[1][0] }}</span>
+                <span> {{ rover[1][1] }}</span>
+                <span> {{ rover[0] }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+
+
+{% endif %}

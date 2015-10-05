@@ -23,8 +23,10 @@ class DefaultController extends Controller
             $type = json_decode($request->query->get('type'));
             if($type == 'content'){
 
-                $this->output = [
-                    '', $translator->trans('main_page')
+                $this->output = ['html' => '',
+                                 'data' => [
+                                    'header' => $translator->trans('main_page')
+                                ]
                 ];
                 return new JsonResponse($this->output);
             }

@@ -23,23 +23,19 @@ define(['underscore', 'jquery'], function (_, $) {
                         });
                         $('#menu').append(list).fadeIn(500);
 
-                        $('a[role=menu]').click(function(event){
-                            event.preventDefault();
-                        });
-
+                        $('#menu').trigger('menu.isReady');
                     }
                 }
             });
         },
-
         getPage: function(){
-            setTimeout(function(){
-                $('a[role=menu]').click(function(event){
-                        page = $(this).attr('href');
-                        $(document).trigger('menu.page', page);
-                    })
-                }, 300)
-            }
+            $('a[role=menu]').click(function(event){
+                event.preventDefault();
+                page = $(this).attr('href');
+                $(document).trigger('menu.page', page);
+            });
+        }
+
     };
 
     return Menu;

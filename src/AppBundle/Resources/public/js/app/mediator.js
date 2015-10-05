@@ -1,42 +1,34 @@
-define(['jquery', './components/menu', './components/content'], function ($, Menu, Content) {
-    function Mediator(){
-    }
-    var page ='';
-
-    Mediator.prototype = {
-        menu: new Menu,
-        content: new Content,
-        renderMenu: function () {
-            this.menu.render();
-        },
-        selectPage: function(){
-            setTimeout(function(){
-                $('a[role=menu]').click(function(event){
-                    event.preventDefault();
-                    page = $(this).attr('href');
-                    if(page.length >0){
-                        console.log(page);
-                        $.ajax({
-                            url: page,
-                            type: 'get',
-                            dataType: 'json',
-                            success: function (data) {
-                                if((typeof data) == "string" ) {
-                                }
-                                if((typeof data) == "object"){
-                                    console.log(data[0], data[1]);
-                                    var myform = data[0];
-                                    $('#content').css('display','none').empty().append(myform).fadeIn(1000);
-                                }
-                            }
-                        });
-                    }else{
-                        console.log('net');
-                    }
-                })
-            }, 500);
+define(['jquery', './components/menu', './components/content', './components/header', '././flickr'],
+function ($, Menu, Content, Header, Flickr) {
+        function Mediator(){
         }
-    };
+        var page ='', menu= new Menu(),content = new Content, header = new Header;
 
-    return Mediator;
-});
+        Mediator.prototype = {
+            renderPage: function(){
+                menu.render();
+                $('#menu').on('menu.isReady', function(){
+                    page = menu.getPage();
+
+                    $(document).on('menu.page', function(e, page){
+                        var ajaxsend = content.getAjaxSend();
+                        if(ajaxsend && ajaxsend.readyState != 4){
+                            ajaxsend.abort();
+                        }
+                        content.getContent(page);
+
+                        $(document).on('content.isReady', function(e, data){
+                            header.setHeader(data);
+
+                            var flickr = new Flickr();
+                            flickr.viewPhoto();
+                        })
+
+                    })
+                });
+            }
+
+        };
+
+        return Mediator;
+    });

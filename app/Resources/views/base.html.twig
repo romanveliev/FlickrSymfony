@@ -17,11 +17,9 @@
     <body>
         <div class="container">
             <div class="row">
-                <div id="wrapper">
                     <div class="col-md-12">
-                        <div id="menu">
 
-                        </div>
+                        <div id="menu"></div>
 
                         <div class="col-md-4"></div>
                         <div class="col-md-4">
@@ -29,16 +27,12 @@
                                 <p>{% trans %}main_page{% endtrans %}</p>
                             </div>
                         </div>
-
                     </div>
 
-
                     <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-4"></div>
-                            <div class="col-md-5">
-                                <div id="content" style="display: none;"></div>
-                            </div>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-5">
+                            <div id="content" style="display: none;"></div>
                         </div>
 
                         {% block body %}
@@ -47,9 +41,11 @@
 
                         {% endblock %}
                     </div>
-                </div>
             </div>
         </div>
+        <div id="bigPhoto" style="width: 100vh; height: 100vh; display: none;"><img src="" id="big" ></div>
+
+        <div id="loadNone"></div>
 
 
     {% block javascripts %}

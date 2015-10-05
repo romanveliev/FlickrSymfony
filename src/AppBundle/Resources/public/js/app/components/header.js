@@ -3,30 +3,12 @@ define(['underscore', 'jquery'], function (_, $) {
     }
 
     Header.prototype = {
-        getHeader: function (page) {
-            if(page.length >0){
-                console.log(page);
-                $.ajax({
-                    url: page,
-                    type: 'get',
-                    data: {'type': JSON.stringify('header')},
-                    dataType: 'json',
-                    success: function (data) {
-                        if((typeof data) == "string" ) {
-
-                        }
-                        if((typeof data) == "object"){
-                            var myform = data[0];
-
-                            $('#header').css('display','none').empty().append(myform).fadeIn(1000);
-                        }
-                    }
-                });
-            }else{
-                console.log('net');
-            }
+        setHeader: function (data) {
+            $('#header').css('display','none').empty().append(data).fadeIn(1000);
         }
     };
 
     return Header;
 });
+
+

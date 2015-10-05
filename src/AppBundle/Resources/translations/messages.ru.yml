@@ -2,11 +2,11 @@ mars: Марс
 flickr: Галерея
 main: Главная
 
-upper_right:
-direction_1:
-direction_2:
-coordinate_1:
-coordinate_2:
+upper_right: Размеры поля.
+direction_1: Напрaвление 1
+direction_2: Направление 2
+coordinate_1: Координаты 1.
+coordinate_2: Координаты 2.
 
 
 flickr_project: Flickr галерея.

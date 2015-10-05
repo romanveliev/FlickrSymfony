@@ -42,6 +42,18 @@ a{
 }
 
 
+#loadNone{
+    display: none;
+}
+#loadActive{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin: -16px 0 0 -16px;
+    width: 32px;height: 32px;
+    background: url('../images/143341460782.gif') center no-repeat;
+}
+
 
 
 #locale_switcher{

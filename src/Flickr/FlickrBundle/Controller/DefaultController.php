@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class DefaultController extends Controller
 {
+    private $content;
     private $output;
     /**
      * @param Request $request
@@ -30,35 +31,25 @@ class DefaultController extends Controller
         }
 
 
+        /** ajax response */
         if ($request->isXMLHttpRequest()) {
             $translator = $this->get('translator');
             $type = json_decode($request->query->get('type'));
             if($type == 'content'){
+                $this->content = $this->renderView('FlickrFlickrBundle:ajax:gallery.html.twig',
+                    ['data' => $photos ]
+                );
 
-                $smth = '<img src="" id="big"><div id="none" ></div><table border="1">';
-                foreach($photos['allPhotos'] as $key => $photo){
-                    $smth .= '<tr class="click"><td><img src='.$photos["sizes"][$key][0]->source.' foo='.$photos['bigPhotoUrl'][$key].'></td><td><p>'.$photo->title.'</p></td><td><a href='.$photos['url'][$key].'></td>';
-                }
-
-                $this->output = [
-                    $smth, $translator->trans('flickr_project')
-                ];
-
-                return new JsonResponse($this->output);
-            }
-
-            if($type == 'header'){
-                $this->output = [
-                    '<p>HEADER FLICKR</p>', $translator->trans('flickr_project')
+                $this->output = ['html' => $this->content,
+                    'data' => [
+                        'header' => $translator->trans('flickr_project')
+                    ]
                 ];
                 return new JsonResponse($this->output);
-
             }
-
         }
 
-
-        return $this->render('FlickrFlickrBundle:Default:index.html.twig', array('data' => $photos));
+        return $this->render('FlickrFlickrBundle:Default:index.html.twig', ['data' => $photos]);
     }
 
 }
