@@ -8,3 +8,6 @@ mars_rover:
     requirements:
             _locale: gb|us|ru|en|en_GB|en_US|fr|ru_RU
 
+mars_move:
+    path:     /mars_move
+    defaults: { _controller: MarsRoverBundle:Default:ajaxMove }

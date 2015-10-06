@@ -1,14 +1,13 @@
-mars: Марс
-flickr: Галерея
-main: Главная
+mars: Марс.
+flickr: Галерея.
+main: Главная.
 
 upper_right: Размеры поля.
-direction_1: Напрaвление 1
-direction_2: Направление 2
+direction_1: Напрaвление 1.
+direction_2: Направление 2.
 coordinate_1: Координаты 1.
 coordinate_2: Координаты 2.
 
-
-flickr_project: Flickr галерея.
-main_page: Главная страница.
-mars_project: Проект марс.
+flickr_project: Flickr галерея
+main_page: Главная страница
+mars_project: Проект марс

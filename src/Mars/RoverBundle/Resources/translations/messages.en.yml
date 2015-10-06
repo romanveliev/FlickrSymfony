@@ -7,3 +7,7 @@ coordinate_2: Coordinate 2
 direction_2: Direction 2
 direction_1: Direction 1
 move: Move
+
+upper_right_coordinates_are_not_valid: Upper-Right coordinates are not valid.
+rovers_coordinates_are_not_valid: Rover\'s coordinates are not valid.
+instructions_are_not_valid: Instructions are not valid

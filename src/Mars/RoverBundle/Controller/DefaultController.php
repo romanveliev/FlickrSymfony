@@ -29,7 +29,7 @@ class DefaultController extends Controller
             ->add('direction_1', 'text',['constraints'=>[new NotBlank(),new Regex(["pattern"=>"/[R,L,M]$/","message"=>"Instructions are not valid"])],'attr'  => ['class' => 'form-control']])
             ->add('coordinate_2', 'text',['constraints'=>[new NotBlank(),new Regex(["pattern"=>"/^[1-9] [1-9] [N,W,S,E]$/","message"=>"Rover's coordinates are not valid."])],'attr'  => ['class' => 'form-control'] ])
             ->add('direction_2', 'text',['constraints'=>[new NotBlank(),new Regex(["pattern"=>"/[R,L,M]$/","message"=>"Instructions are not valid"])],'attr'  => ['class' => 'form-control'] ])
-            ->add('save', 'submit', ['label' => 'move', "attr"=>["class"=>"btn btn-default"] ] )
+            ->add('save', 'submit', ['label' => 'move', "attr"=>["class"=>"btn btn-default", 'role' => 'submit'] ] )
             ->getForm();
 
         $form->handleRequest($request);
@@ -75,4 +75,51 @@ class DefaultController extends Controller
             'form' => $form->createView(),'rovers'=>$this->data]);
     }
 
+    public function ajaxMoveAction(Request $request){
+        if($request->isXmlHttpRequest()){
+            $translator = $this->get('translator');
+            $instructions = json_decode($request->request->get('instructions'));
+
+            foreach($instructions as $instruction){
+                if(empty($instruction)){
+                    return new JsonResponse($translator->trans('check_inputs'));
+                }
+            }
+
+            if(!preg_match( '/^[1-9] [1-9]$/', $instructions[0])){
+                return new JsonResponse($translator->trans('upper_right_coordinates_are_not_valid'));
+            }
+            if(!preg_match( '/^[1-9] [1-9] [N,W,S,E]$/', $instructions[1]) && !preg_match( '/^[1-9] [1-9] [N,W,S,E]$/', $instructions[3])){
+                return new JsonResponse($translator->trans('rovers_coordinates_are_not_valid'));
+            }
+
+            if(!preg_match( '/[R,L,M]$/', $instructions[2]) || !preg_match( '/[R,L,M]$/', $instructions[4])){
+                return new JsonResponse($translator->trans('instructions_are_not_valid'));
+            }
+
+
+            $upperRight = explode(' ',$instructions[0]);
+            $array = [
+                [
+                    $instructions[1], $instructions[2]
+                ],
+                [
+                    $instructions[3], $instructions[4]
+                ],
+            ];
+            foreach ($array as $value) {
+                $model = new Rover($value[0], $value[1], $upperRight);
+                $this->data[] = $model->changeDirection();
+            }
+
+            $this->content = $this->renderView('MarsRoverBundle:ajax:coordinates.html.twig',[
+                    'rovers' => $this->data
+            ]);
+
+            $this->output = [ 'html' => $this->content ];
+
+            return new JsonResponse($this->output);
+        }
+
+    }
 }

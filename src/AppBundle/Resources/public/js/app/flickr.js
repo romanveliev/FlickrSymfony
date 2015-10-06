@@ -15,9 +15,7 @@ define(['underscore', 'jquery'], function (_, $) {
                 var img = $(this).find('img').attr('foo');
                 $('#big').attr('src',img);
                 $('#big').load(function() {
-                    $('#bigPhoto').
                     $('#big').animate({'left':'0%'},800);
-                    $('body').css('background-image', 'url('+img+')');
                     $('#loadActive').attr('id','loadNone');
                 });
             });

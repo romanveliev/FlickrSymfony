@@ -1,5 +1,6 @@
-Coordinate: Координаты
-Direction: Инструкции
+coordinate: Координаты
+direction: Направление
+rover: Марсоход
 
 upper_right: Размер поля
 Coordinate: Coordinate
@@ -10,3 +11,8 @@ coordinate_2: Координата 2
 direction_2: Направление 2
 direction_1: Направление 1
 move: Поехали
+
+check_inputs: Все поля дожны быть заполнены !
+upper_right_coordinates_are_not_valid: Upper-Right coordinates are not valid.
+rovers_coordinates_are_not_valid: Rover\'s coordinates are not valid.
+instructions_are_not_valid: Instructions are not valid

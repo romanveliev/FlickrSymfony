@@ -1,7 +1,3 @@
-{% form_theme form 'form_table_layout.html.twig' %}
-
-    {{ form(form)|trans|raw }}
-
 {% if rovers is not empty %}
 
     <ul>
@@ -17,7 +13,3 @@
 
 
 {% endif %}
-<div id="error_box" class="alert alert-danger" style="display: none;" role="alert">
-    <p id="errorFeedback"></p>
-</div>
-<div class="mars_coordinates"></div>
